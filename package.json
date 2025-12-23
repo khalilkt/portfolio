@@ -2,6 +2,7 @@
   "name": "portfolio-front",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,11 +10,19 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@calcom/embed-react": "^1.5.3",
+    "@payloadcms/db-sqlite": "^3.68.5",
+    "@payloadcms/next": "^3.68.5",
+    "@payloadcms/richtext-lexical": "^3.68.5",
+    "classnames": "^2.5.1",
+    "graphql": "^16.8.1",
     "next": "16.0.10",
+    "payload": "^3.68.5",
     "react": "19.2.1",
     "react-dom": "19.2.1"
   },
   "devDependencies": {
+    "@payloadcms/graphql": "3.68.5",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

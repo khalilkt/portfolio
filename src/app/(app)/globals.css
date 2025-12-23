@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+:root {
+}
+
+@theme {
+  --color-primary: #202020;
+  --color-secondary: #999999;
+  --color-separator-gray: #e0e0e0;
+  --color-gray: #666666;
+}
