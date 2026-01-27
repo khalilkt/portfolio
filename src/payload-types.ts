@@ -183,6 +183,7 @@ export interface Project {
   endDate?: string | null;
   description?: string | null;
   thumbnailImage: number | Media;
+  slug?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -193,7 +194,8 @@ export interface Project {
 export interface Blog {
   id: number;
   title: string;
-  slug: string;
+  slug?: string | null;
+  status: 'draft' | 'published';
   content: {
     root: {
       type: string;
@@ -375,6 +377,7 @@ export interface ProjectSelect<T extends boolean = true> {
   endDate?: T;
   description?: T;
   thumbnailImage?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -385,6 +388,7 @@ export interface ProjectSelect<T extends boolean = true> {
 export interface BlogSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  status?: T;
   content?: T;
   category?: T;
   publishedDate?: T;

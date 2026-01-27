@@ -32,12 +32,13 @@ export default async function RootLayout({
   const twitterUrl = homePageData.Header.socials.find(
     (e) => e.icon === "x"
   )?.url;
+
   return (
     <html lang="en">
-      <body>
-        <Header />
+      <body className="overflow-x-hidden">
+        <Header data={homePageData.Header} t={t} />
         <main
-          className={`${geistSans.variable} ${geistMono.variable} antialiased ${geistSans.className} font-geist-sans mx-auto min-h-screen max-w-150 scroll-smooth flex flex-col lg:pt-16 pt-12 text-primary font-medium -tracking-[0.02em] p-5`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased ${geistSans.className} font-geist-sans mx-auto min-h-screen max-w-150 scroll-smooth flex flex-col lg:pt-16 pt-12 text-primary font-medium -tracking-[0.02em] p-5  `}
         >
           <AvatarDiv data={homePageData.Header} t={t} />
           {children}

@@ -1,10 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AVATAR_SECTION_ID } from "./HeroSection";
+import { AVATAR_SECTION_ID, AvatarDiv } from "./HeroSection";
+import { HomepageCms } from "@/lib/cms/types";
+import { TObject } from "@/lib/translation";
 
-export default function Header() {
-  const [isAvatarVisible, setIsAvatarVisible] = useState(false);
+export default function Header({
+  data,
+  t,
+}: {
+  data: HomepageCms["Header"];
+  t: TObject;
+}) {
+  const [isAvatarVisible, setIsAvatarVisible] = useState(true);
 
   useEffect(() => {
     const target = document.getElementById(AVATAR_SECTION_ID);
@@ -16,7 +24,7 @@ export default function Header() {
       },
       {
         threshold: 0.1, // 10% visible
-      }
+      },
     );
 
     observer.observe(target);
@@ -25,10 +33,9 @@ export default function Header() {
   }, []);
   return (
     <header
-      className={`fixed z-50 flex gap-x-10 bg-white/80 backdrop-blur-md border-b border-black/5 transition-all duration-150 h-10 w-full ${isAvatarVisible ? " opacity-0 -top-10" : "opacity-100 top-0"}`}
+      className={`fixed z-50 px-6 flex pt-5 bg-white/80 backdrop-blur-md transition-all duration-150 w-full ${isAvatarVisible ? " opacity-0 -top-10" : "opacity-100 top-0"}`}
     >
-      <a href="/">home</a>
-      <a href="/writings">Writings</a>
+      <AvatarDiv data={data} t={t} isNav={true} />
     </header>
   );
 }

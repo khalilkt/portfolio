@@ -86,3 +86,24 @@ export function WhatsappIcon(props: IconProps) {
     </svg>
   );
 }
+
+export function LinkIcon(props: IconProps) {
+  return (
+    <svg
+      width="9"
+      height="9"
+      viewBox="0 0 9 9"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+      className={cx("stroke-primary", props.className)}
+    >
+      <path
+        d="M4.64573 7.00275L4.05647 7.59201C3.24288 8.4056 1.92379 8.4056 1.11019 7.59201C0.296602 6.77842 0.296602 5.45932 1.11019 4.64573L1.69945 4.05647M7.00275 4.64573L7.59201 4.05647C8.4056 3.24288 8.4056 1.92379 7.59201 1.11019C6.77841 0.296602 5.45932 0.296602 4.64573 1.11019L4.05647 1.69945M2.89277 5.80943L5.80943 2.89276"
+        stroke="#202020"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

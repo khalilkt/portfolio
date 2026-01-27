@@ -17,6 +17,7 @@ async function fetchGraphQL(query: string, variables = {}, tt?: string) {
   const res = await fetch(`${ROOT_URL}/api/graphql`, {
     method: "POST",
     cache: "force-cache",
+    next: { revalidate: 10 },
     headers: {
       "Content-Type": "application/json",
       Authorization: `${Users.slug} API-Key ${CMS_TOKEN}`,
@@ -28,14 +29,14 @@ async function fetchGraphQL(query: string, variables = {}, tt?: string) {
     "TOOK ",
     (performance.now() - start).toFixed(2),
     "ms to fetch graphql for  ",
-    tt
+    tt,
   );
 
   const json = await res.json();
   if (!!json.errors) {
     console.error("Error while fetching the graphql : ", json.errors);
     throw Error(
-      `Error while fetching the graphql ${JSON.stringify(json.errors)}`
+      `Error while fetching the graphql ${JSON.stringify(json.errors)}`,
     );
   }
   return json.data;
@@ -70,6 +71,28 @@ export async function getBlogData(slug: string): Promise<BlogCms | undefined> {
     return ret.Blogs.docs.at(0);
   } catch (e) {
     console.log("ERROR WHILE GETTING THE BLOG DATA : ", e);
+    throw e;
+  }
+}
+
+export async function getProjectRelatedBlogSlug(
+  projectId: string,
+): Promise<string | undefined> {
+  console.log("GETTING BLOG SLUG FOR PROJECT ID : ", projectId);
+  const q = `query BlogByProjectId {
+  Blogs(limit: 1, where: { project: { equals: "${projectId}" } } ) {
+    docs {
+    slug
+    }
+  }
+}
+`;
+
+  try {
+    const ret = await fetchGraphQL(q);
+    return ret.Blogs.docs.at(0)?.slug;
+  } catch (e) {
+    console.log("ERROR WHILE GETTING THE BLOG DATA BY PROJECT ID : ", e);
     throw e;
   }
 }

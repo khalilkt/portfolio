@@ -7,6 +7,7 @@ type UploadFileCms = {
 };
 
 export type ProjectCms = {
+  id: string;
   name: string;
   thumbnailImage: UploadFileCms;
   description: string;
@@ -31,13 +32,21 @@ export type SocialIconType =
 
 export type HomePageProjectCms = Pick<
   ProjectCms,
-  "name" | "thumbnailImage" | "description" | "startDate" | "endDate"
+  "id" | "name" | "thumbnailImage" | "description" | "startDate" | "endDate"
 >;
 
 export type HomePageBlogCms = Pick<
   BlogCms,
   "title" | "slug" | "category" | "publishedDate"
 >;
+
+export const socialIconNames: Record<SocialIconType, string> = {
+  github: "GitHub",
+  linkedin: "LinkedIn",
+  x: "X/Twitter",
+  instagram: "Instagram",
+  whatsapp: "WhatsApp",
+};
 
 export type HomepageCms = {
   Header: {

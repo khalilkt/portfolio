@@ -12,9 +12,9 @@ export const TextAssets: CollectionConfig = {
   slug: "text_assets",
   access: {
     read: (): boolean => true,
-    create: (): boolean => false,
-    update: (): boolean => false,
-    delete: (): boolean => false,
+    create: (): boolean => true,
+    update: (): boolean => true,
+    delete: (): boolean => true,
   },
   fields: translationKeysList.map((e) => {
     return {

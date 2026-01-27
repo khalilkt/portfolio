@@ -6,12 +6,25 @@ export const UPLOAD_FILE_FIELDS = `
         url
 `;
 
+export const PROJECT_PAGE_FIELDS = `
+  name
+  startDate
+  endDate
+  description
+  thumbnailImage {
+    ${UPLOAD_FILE_FIELDS}
+  }
+`;
+
 export const BLOG_PAGE_FIELDS = `
      title
       slug
       category
       content
       publishedDate
+      project {
+    ${PROJECT_PAGE_FIELDS}
+      }
 `;
 
 export const HOME_PAGE_FIELDS = `
@@ -31,12 +44,14 @@ HomePage {
       }
     }
     blogs {
+    id
       title
       slug
       category
       publishedDate
     }
     projects {
+    id
       name
       startDate
       endDate

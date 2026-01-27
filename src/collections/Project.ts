@@ -1,9 +1,29 @@
 import { CollectionConfig } from "payload";
 
+const generateSlug = (name: string): string => {
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+};
+
 export const Project: CollectionConfig = {
   slug: "project",
   admin: {
     useAsTitle: "name",
+  },
+  hooks: {
+    beforeValidate: [
+      async ({ data }) => {
+        if (!data) return data;
+        if (data.name && !data.slug) {
+          data.slug = generateSlug(data.name);
+        }
+        return data;
+      },
+    ],
   },
   fields: [
     {
@@ -30,6 +50,15 @@ export const Project: CollectionConfig = {
       type: "upload",
       required: true,
       relationTo: "media",
+    },
+    {
+      name: "slug",
+      type: "text",
+      unique: true,
+      admin: {
+        placeholder: "auto-generated-from-name",
+        readOnly: true,
+      },
     },
   ],
 };

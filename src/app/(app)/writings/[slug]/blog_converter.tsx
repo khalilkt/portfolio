@@ -2,37 +2,67 @@ import {
   defaultJSXConverters,
   RichText,
 } from "@payloadcms/richtext-lexical/react";
-import { ComponentProps } from "react";
+import { ComponentProps, JSX } from "react";
 import Image from "next/image";
+import { Media } from "@/payload-types";
+import { SerializedListNode } from "@payloadcms/richtext-lexical";
+import cx from "classnames";
 
 export const blogConverter: ComponentProps<typeof RichText>["converters"] = {
   ...defaultJSXConverters,
+
   heading: ({ node, nodesToJSX }) => {
     const children = nodesToJSX({ nodes: node.children });
-    return <h2 className="text-2xl font-medium mt-10 ">{children}</h2>;
+    const Tag = `${node.tag}` as keyof JSX.IntrinsicElements;
+    return (
+      <Tag className=" text-primary mt-10 text-2xl leading-8">{children}</Tag>
+    );
+  },
+  link: ({ node, nodesToJSX }) => {
+    const children = nodesToJSX({ nodes: node.children });
+    return (
+      <a href={node.fields.url} className="text-blue-600 underline">
+        {children}
+      </a>
+    );
   },
   paragraph: ({ node, nodesToJSX }) => {
     const children = nodesToJSX({ nodes: node.children });
     return (
-      <p className="mt-5 text-gray font-medium leading-7 relative">
-        {children}
-        {/* P cannot be  a descendent of p  */}
-        {/* <div className="hidden absolute -right-70 top-0 bg-[#F0F0F0] rounded-lg w-60 p-3">
-          <p className="text-gray text-md">aaosihdoasd</p>
-          <p className="text-gray text-xs leading-4.5">
-            Lorem ipsum dolor sit amet consectetur. Amet et amet.
-          </p>
-        </div> */}
-      </p>
+      <p className="mt-5 text-gray leading-7 tracking-[-.02em]">{children}</p>
     );
+  },
+  listitem: ({ node, nodesToJSX, parent }) => {
+    const children = nodesToJSX({ nodes: node.children });
+
+    const haveNestedList = node.children.some((child) => child.type === "list");
+    const isNumberedList =
+      parent.type === "list"
+        ? (parent as SerializedListNode)?.listType === "number"
+        : false;
+
+    return (
+      <li
+        className={cx(
+          ` ml-8 leading-7 tracking-[-.02em]`,
+          !haveNestedList && (isNumberedList ? "list-decimal" : "list-disc"),
+        )}
+      >
+        {children}
+      </li>
+    );
+  },
+  list: ({ node, nodesToJSX }) => {
+    const children = nodesToJSX({ nodes: node.children });
+    return <node.tag className="space-y-2 mt-3">{children}</node.tag>;
   },
   upload: ({ node }) => {
     return (
       <>
         <Image
-          alt={node.value.alt}
-          src={node.value.url as string}
-          className="w-full mt-12"
+          alt={(node.value as Media).alt}
+          src={(node.value as Media).url as string}
+          className="w-full mt-12 border border-gray"
           width={600}
           height={365}
         />

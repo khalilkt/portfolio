@@ -5,6 +5,25 @@ export const Blog: CollectionConfig = {
   admin: {
     useAsTitle: "title",
   },
+  access: {
+    read: (): boolean => true,
+    create: (): boolean => true,
+    update: (): boolean => true,
+    delete: (): boolean => true,
+  },
+  hooks: {
+    beforeValidate: [
+      ({ data }) => {
+        if (data?.title) {
+          data.slug = data.title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+        }
+        return data;
+      },
+    ],
+  },
   fields: [
     {
       name: "title",
@@ -14,10 +33,28 @@ export const Blog: CollectionConfig = {
     {
       name: "slug",
       type: "text",
-      required: true,
-      unique: true,
-    },
 
+      unique: true,
+      admin: {
+        readOnly: true,
+      },
+    },
+    {
+      name: "status",
+      type: "select",
+      options: [
+        {
+          label: "Draft",
+          value: "draft",
+        },
+        {
+          label: "Published",
+          value: "published",
+        },
+      ],
+      defaultValue: "draft",
+      required: true,
+    },
     {
       name: "content",
       type: "richText",
