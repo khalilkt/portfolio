@@ -1,12 +1,20 @@
 import Image from "next/image";
-import { geistMono } from "../(app)/page";
+
 import { HomePageProjectCms } from "@/lib/cms/types";
 import { getProjectRelatedBlogSlug } from "@/lib/cms/cms";
 import { getBlogItemLink } from "./BlogItem";
+import ImageWrapper from "./ImageWrapper";
+import { Geist_Mono } from "next/font/google";
 
 interface ProjectItemProps {
   project: HomePageProjectCms & { blogSlug: string | null };
 }
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  preload: true,
+  subsets: ["latin"],
+});
 
 export function parseDatesForProjectDuration(
   startDate: string,
@@ -31,13 +39,15 @@ function ProjectItem({ project }: ProjectItemProps) {
       className="block"
     >
       <div className="relative">
-        <Image
-          src={project.thumbnailImage.url!}
-          alt={project.thumbnailImage.alt}
-          height={300}
-          width={1000}
-          className="w-full h-91.25 object-cover object-top"
-        />
+        <ImageWrapper>
+          <Image
+            src={project.thumbnailImage.url!}
+            alt={project.thumbnailImage.alt}
+            height={300}
+            width={1000}
+            className="w-full h-91.25 object-cover object-top"
+          />
+        </ImageWrapper>
         {project.name && (
           <h3 className="text-sm leading-4.5 mt-4">{project.name}</h3>
         )}

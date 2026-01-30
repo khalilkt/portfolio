@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Media } from "@/payload-types";
 import { SerializedListNode } from "@payloadcms/richtext-lexical";
 import cx from "classnames";
+import ImageWrapper from "@/app/components/ImageWrapper";
 
 export const blogConverter: ComponentProps<typeof RichText>["converters"] = {
   ...defaultJSXConverters,
@@ -58,7 +59,7 @@ export const blogConverter: ComponentProps<typeof RichText>["converters"] = {
   },
   upload: ({ node }) => {
     return (
-      <div className="mt-12 bg-gray-100 p-8 rounded">
+      <ImageWrapper className="mt-12">
         <Image
           alt={(node.value as Media).alt}
           src={(node.value as Media).url as string}
@@ -66,7 +67,7 @@ export const blogConverter: ComponentProps<typeof RichText>["converters"] = {
           width={600}
           height={365}
         />
-      </div>
+      </ImageWrapper>
     );
   },
 };

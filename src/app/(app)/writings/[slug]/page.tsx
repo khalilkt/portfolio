@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getBlogData, getHomePageData, getLabelAssets } from "@/lib/cms/cms";
 import parseDate from "@/lib/utils";
 import { RichText } from "@payloadcms/richtext-lexical/react";
@@ -5,6 +7,7 @@ import { notFound } from "next/navigation";
 import { blogConverter } from "./blog_converter";
 import { BlogProvider } from "@/app/components/BlogProvider";
 import Image from "next/image";
+import ImageWrapper from "@/app/components/ImageWrapper";
 
 export default async function BlogPage({
   params,
@@ -30,7 +33,7 @@ export default async function BlogPage({
         )}
         {blog.project && (
           <>
-            <div className="bg-gray-200 p-8 rounded">
+            <ImageWrapper>
               <Image
                 src={blog.project.thumbnailImage.url!}
                 alt={blog.project.thumbnailImage.alt}
@@ -38,7 +41,7 @@ export default async function BlogPage({
                 width={1000}
                 className="w-full h-91.25 object-cover object-top"
               />
-            </div>
+            </ImageWrapper>
             <div className="flex gap-x-4 mt-12 text-[#3687FF] text-sm font-medium">
               <p className="min-w-max">
                 {parseDate(blog.project.startDate, false)}

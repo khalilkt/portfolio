@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { BlogItem } from "@/app/components/BlogItem";
 import BlogsSection from "@/app/components/BlogsSection";
 import { getAllBlogsList, getLabelAssets } from "@/lib/cms/cms";

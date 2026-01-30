@@ -1,10 +1,17 @@
 import cx from "classnames";
-import { geistMono } from "../(app)/page";
 import { BlogCms, HomePageBlogCms } from "@/lib/cms/types";
+import { Geist_Mono } from "next/font/google";
 
 export function getBlogItemLink(slug: string) {
   return "/writings/" + slug;
 }
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+  preload: true,
+});
+
 export function BlogItem({
   blog,
   variant,
