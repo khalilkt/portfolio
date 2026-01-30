@@ -109,3 +109,27 @@ export async function getLabelAssets(): Promise<TObject> {
     throw e;
   }
 }
+
+export async function getAllBlogsList(): Promise<
+  Pick<BlogCms, "slug" | "title" | "publishedDate" | "category">[]
+> {
+  const q = `query AllBlogSlugs {
+      Blogs {
+        docs {
+        slug
+        title 
+        publishedDate
+        category
+        }
+      }
+    }
+  `;
+
+  try {
+    const ret = await fetchGraphQL(q, {}, "ALL_BLOG_SLUGS");
+    return ret.Blogs.docs;
+  } catch (e) {
+    console.log("ERROR WHILE GETTING ALL BLOG SLUGS : ", e);
+    throw e;
+  }
+}

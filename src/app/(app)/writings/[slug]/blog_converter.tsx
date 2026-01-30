@@ -58,15 +58,15 @@ export const blogConverter: ComponentProps<typeof RichText>["converters"] = {
   },
   upload: ({ node }) => {
     return (
-      <>
+      <div className="mt-12 bg-gray-100 p-8 rounded">
         <Image
           alt={(node.value as Media).alt}
           src={(node.value as Media).url as string}
-          className="w-full mt-12 border border-gray"
+          className="w-full rounded-md"
           width={600}
           height={365}
         />
-      </>
+      </div>
     );
   },
 };

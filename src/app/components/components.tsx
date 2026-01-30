@@ -7,10 +7,10 @@ export function Button({
   variant: "primary" | "text";
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   const rootClassName =
-    "flex gap-x-1.5 items-center px-3.5 py-2.5 text-sm leading-4.5 cursor-pointer";
+    "flex gap-x-1.5 items-center px-3.5 py-2.5 text-sm rounded-[10px] leading-4.5 cursor-pointer transition-colors duration-150";
 
-  const primaryClassname = "bg-primary text-white rounded-[10px]";
-  const textClassname = "text-primary ";
+  const primaryClassname = "bg-primary text-white";
+  const textClassname = "text-primary hover:bg-[#F0F0F0]";
   return (
     <button
       {...props}
@@ -18,7 +18,7 @@ export function Button({
         rootClassName,
         variant === "primary" && primaryClassname,
         variant === "text" && textClassname,
-        props.className && props.className
+        props.className && props.className,
       )}
     >
       {props.children}
@@ -36,7 +36,7 @@ export function Divider({
       className={cx(
         "border-t border-separator-gray w-full",
         isMini ? "" : "my-12",
-        props.className
+        props.className,
       )}
     />
   );

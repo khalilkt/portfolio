@@ -60,5 +60,18 @@ export const Project: CollectionConfig = {
         readOnly: true,
       },
     },
+    {
+      name: "stack",
+      type: "array",
+      label: "Tech Stack",
+      minRows: 0,
+      maxRows: 20,
+      fields: [
+        {
+          name: "tech",
+          type: "text",
+        },
+      ],
+    },
   ],
 };

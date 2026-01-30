@@ -184,6 +184,12 @@ export interface Project {
   description?: string | null;
   thumbnailImage: number | Media;
   slug?: string | null;
+  stack?:
+    | {
+        tech?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -235,6 +241,8 @@ export interface TextAsset {
   back_to_top_cta?: string | null;
   follow_me_on?: string | null;
   published?: string | null;
+  writings?: string | null;
+  writings_description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -378,6 +386,12 @@ export interface ProjectSelect<T extends boolean = true> {
   description?: T;
   thumbnailImage?: T;
   slug?: T;
+  stack?:
+    | T
+    | {
+        tech?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -413,6 +427,8 @@ export interface TextAssetsSelect<T extends boolean = true> {
   back_to_top_cta?: T;
   follow_me_on?: T;
   published?: T;
+  writings?: T;
+  writings_description?: T;
   updatedAt?: T;
   createdAt?: T;
 }

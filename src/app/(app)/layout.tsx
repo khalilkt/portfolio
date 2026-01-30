@@ -30,7 +30,7 @@ export default async function RootLayout({
   const t = await getLabelAssets();
   const homePageData = await getHomePageData();
   const twitterUrl = homePageData.Header.socials.find(
-    (e) => e.icon === "x"
+    (e) => e.icon === "x",
   )?.url;
 
   return (

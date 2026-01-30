@@ -13,6 +13,7 @@ export type ProjectCms = {
   description: string;
   startDate: string;
   endDate: string;
+  stack: { tech: string }[];
 };
 
 export type BlogCms = {
@@ -21,6 +22,7 @@ export type BlogCms = {
   category: string;
   publishedDate: string;
   content: SerializedEditorState;
+  project: ProjectCms | null;
 };
 
 export type SocialIconType =

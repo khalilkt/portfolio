@@ -33,7 +33,7 @@ function HeaderLink({
     <a
       className={cx(
         "font-medium text-sm leading-4.5 py-0.75 px-1.5 rounded-md hover:bg-black/5 transition-colors duration-150",
-        false ? "text-primary" : "text-secondary",
+        "text-secondary hover:text-primary",
       )}
       href={href}
     >

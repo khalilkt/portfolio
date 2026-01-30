@@ -16,6 +16,7 @@ export default function CalButton({ children }: { children: ReactNode }) {
       data-cal-link="khalil-ktiri-btenjq/30min"
       data-cal-config='{"layout":"month_view"}'
       variant={"primary"}
+      className="bg-primary hover:bg-[#333333]"
     >
       {children}
     </Button>

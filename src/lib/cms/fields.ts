@@ -7,12 +7,16 @@ export const UPLOAD_FILE_FIELDS = `
 `;
 
 export const PROJECT_PAGE_FIELDS = `
+  id
   name
   startDate
   endDate
   description
   thumbnailImage {
     ${UPLOAD_FILE_FIELDS}
+  }
+  stack { 
+    tech
   }
 `;
 
@@ -51,14 +55,8 @@ HomePage {
       publishedDate
     }
     projects {
-    id
-      name
-      startDate
-      endDate
-      description
-      thumbnailImage {
-       ${UPLOAD_FILE_FIELDS}
-      }
+      ${PROJECT_PAGE_FIELDS}
+     
     }
   }
    `;

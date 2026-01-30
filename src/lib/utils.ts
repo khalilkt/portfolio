@@ -13,7 +13,10 @@ const MONTHS = [
   "DÉCEMBRE",
 ];
 
-export default function parseDate(value: string): string {
+export default function parseDate(
+  value: string,
+  withDays: boolean = true,
+): string {
   const splited = value.split("T")[0].split("-");
 
   const year = splited[0];
@@ -22,5 +25,9 @@ export default function parseDate(value: string): string {
 
   const formattedDay = day.startsWith("0") ? day.slice(1) : day;
 
-  return `${formattedDay} ${MONTHS[monthIndex].toLowerCase()} ${year}`;
+  if (withDays) {
+    return `${formattedDay} ${MONTHS[monthIndex].toLowerCase()} ${year}`;
+  } else {
+    return `${MONTHS[monthIndex].toLowerCase()} ${year}`;
+  }
 }

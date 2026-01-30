@@ -25,7 +25,10 @@ export function SocialIcon({
     <a href={href}>
       <Icon
         {...props}
-        className={cx("w-4 fill-secondary h-4", props.className)}
+        className={cx(
+          "transition-colors duration-150 w-4 fill-secondary hover:fill-primary h-4",
+          props.className,
+        )}
         href={href}
       />
     </a>

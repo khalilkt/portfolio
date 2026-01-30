@@ -5,6 +5,8 @@ export const translationKeysList: string[] = [
   "back_to_top_cta",
   "follow_me_on",
   "published",
+  "writings",
+  "writings_description",
 ];
 
 export type TranslationKey = (typeof translationKeysList)[number];
