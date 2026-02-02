@@ -10,3 +10,8 @@ services:
     restart: always
     ports:
       - 3023:3000
+    volumes:
+      - portfolio_db_data:/app/data
+
+volumes:
+  portfolio_db_data:
