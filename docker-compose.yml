@@ -1,6 +1,8 @@
 services:
   next-app:
     container_name: next-app
+    env_file:
+      - .env
     build:
       context: ./
       dockerfile: prod.Dockerfile
