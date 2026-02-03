@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   /* config options here */
   output: "standalone",
   turbopack: {},
+  outputFileTracingIncludes: {
+    "server.js": ["./node_modules/libsql/**"],
+  },
   // experimental: {
   //   turbopack: {
   //     enabled: false,
