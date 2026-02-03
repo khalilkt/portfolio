@@ -14,6 +14,7 @@ services:
       - 3023:3000
     volumes:
       - portfolio_db_data:/app/data
+    user: root
 
 volumes:
   portfolio_db_data:
