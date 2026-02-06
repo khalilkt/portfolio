@@ -9,6 +9,8 @@ services:
       args:
         ENV_VARIABLE: ${ENV_VARIABLE}
         NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+    volumes:
+      - payload-media:/app/media
     restart: always
     ports:
       - 3023:3000
@@ -33,3 +35,4 @@ services:
 
 volumes:
   pgdata:
+  payload-media:
