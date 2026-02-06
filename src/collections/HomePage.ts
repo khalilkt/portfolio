@@ -72,5 +72,12 @@ export const HomePage: GlobalConfig = {
       relationTo: "blog",
       hasMany: true,
     },
+    // add field where I can upload a resume file
+    {
+      name: "resume",
+      label: "Resume",
+      type: "upload",
+      relationTo: "media",
+    },
   ],
 };

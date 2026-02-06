@@ -58,6 +58,9 @@ HomePage {
       ${PROJECT_PAGE_FIELDS}
      
     }
+    resume {
+      ${UPLOAD_FILE_FIELDS}
+    }
   }
    `;
 

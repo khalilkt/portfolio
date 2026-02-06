@@ -7,6 +7,8 @@ export const translationKeysList: string[] = [
   "published",
   "writings",
   "writings_description",
+  "download_cv_cta",
+  "download_cv_link",
 ];
 
 export type TranslationKey = (typeof translationKeysList)[number];

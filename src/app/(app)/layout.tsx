@@ -31,9 +31,7 @@ export default async function RootLayout({
 }>) {
   const t = await getLabelAssets();
   const homePageData = await getHomePageData();
-  const twitterUrl = homePageData.Header.socials.find(
-    (e) => e.icon === "x",
-  )?.url;
+  const resumeUrl = homePageData.resume?.url;
 
   return (
     <html lang="en">
@@ -45,7 +43,7 @@ export default async function RootLayout({
           <AvatarDiv data={homePageData.Header} t={t} />
           {children}
           <Divider />
-          <Footer t={t} twitterUrl={twitterUrl} />
+          <Footer t={t} resumeUrl={resumeUrl ?? undefined} />
         </main>
       </body>
     </html>

@@ -243,6 +243,8 @@ export interface TextAsset {
   published?: string | null;
   writings?: string | null;
   writings_description?: string | null;
+  download_cv_cta?: string | null;
+  download_cv_link?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -429,6 +431,8 @@ export interface TextAssetsSelect<T extends boolean = true> {
   published?: T;
   writings?: T;
   writings_description?: T;
+  download_cv_cta?: T;
+  download_cv_link?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -507,6 +511,7 @@ export interface HomePage {
   };
   projects?: (number | Project)[] | null;
   blogs?: (number | Blog)[] | null;
+  resume?: (number | null) | Media;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -532,6 +537,7 @@ export interface HomePageSelect<T extends boolean = true> {
       };
   projects?: T;
   blogs?: T;
+  resume?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

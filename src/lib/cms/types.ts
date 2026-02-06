@@ -64,4 +64,5 @@ export type HomepageCms = {
   };
   projects: HomePageProjectCms[];
   blogs: HomePageBlogCms[];
+  resume: UploadFileCms;
 };

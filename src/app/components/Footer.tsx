@@ -4,10 +4,10 @@ import { TObject } from "@/lib/translation";
 
 export default function Footer({
   t,
-  twitterUrl,
+  resumeUrl,
 }: {
   t: TObject;
-  twitterUrl: string | undefined;
+  resumeUrl: string | undefined;
 }) {
   return (
     <div className="flex flex-col  mx-auto gap-y-8 items-center">
@@ -19,11 +19,11 @@ export default function Footer({
       >
         {t.back_to_top_cta}
       </button>
-      {twitterUrl && (
+      {resumeUrl && (
         <p className="text-sm font-medium">
-          {t.follow_me_on}{" "}
-          <a href={twitterUrl} className="text-secondary">
-            X/Twitter
+          {t.download_cv_cta}{" "}
+          <a href={resumeUrl} className="text-secondary" download>
+            {t.download_cv_link}
           </a>
         </p>
       )}
