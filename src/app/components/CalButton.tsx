@@ -3,7 +3,13 @@
 import { getCalApi } from "@calcom/embed-react";
 import { ReactNode, useEffect } from "react";
 import { Button } from "./components";
-export default function CalButton({ children }: { children: ReactNode }) {
+export default function CalButton({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({ namespace: "30min" });
@@ -16,7 +22,7 @@ export default function CalButton({ children }: { children: ReactNode }) {
       data-cal-link="khalil-ktiri-btenjq/30min"
       data-cal-config='{"layout":"month_view"}'
       variant={"primary"}
-      className="bg-primary hover:bg-[#333333]"
+      className={`bg-primary hover:bg-[#333333] ${className ?? ""}`}
     >
       {children}
     </Button>

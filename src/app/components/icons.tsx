@@ -110,3 +110,60 @@ export function LinkIcon(props: IconProps) {
     </svg>
   );
 }
+export function HeaderDropIcon(props: IconProps) {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      {...props}
+      className={cx("stroke-primary", props.className)}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M2.5 10H17.5M2.5 5H17.5M7.5 15H17.5"
+        stroke="#202020"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function CloseIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="-0.5 0 25 25"
+      fill="none"
+      width="20"
+      height="20"
+      xmlns="http://www.w3.org/2000/svg"
+      stroke="#171717"
+    >
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        <path
+          d="M3 21.32L21 3.32001"
+          stroke="#000000"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        ></path>{" "}
+        <path
+          d="M3 3.32001L21 21.32"
+          stroke="#000000"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        ></path>{" "}
+      </g>
+    </svg>
+  );
+}

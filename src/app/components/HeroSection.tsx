@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import { SocialIcon, WhatsappIcon } from "./icons";
+import { CloseIcon, HeaderDropIcon, SocialIcon, WhatsappIcon } from "./icons";
 import { Button } from "./components";
 import { HomepageCms, socialIconNames } from "@/lib/cms/types";
 import {
@@ -10,6 +12,11 @@ import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical
 import CalButton from "./CalButton";
 import { TObject } from "@/lib/translation";
 import cx from "classnames";
+import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
+import dynamic from "next/dynamic";
+import { NoSSR } from "./NoSSR";
+import { useDeviceSize } from "./hooks";
 
 interface HeroSectionProps {
   data: HomepageCms["Header"];
@@ -32,7 +39,8 @@ function HeaderLink({
   return (
     <a
       className={cx(
-        "font-medium text-sm leading-4.5 py-0.75 px-1.5 rounded-md hover:bg-black/5 transition-colors duration-150",
+        "hidden md:block",
+        "font-medium text-sm leading-4.5 px-1.5 rounded-md hover:bg-black/5 transition-colors duration-150",
         "text-secondary hover:text-primary",
       )}
       href={href}
@@ -42,16 +50,79 @@ function HeaderLink({
   );
 }
 
+function HeaderDropdownExpanded({ data, t }: Omit<HeroSectionProps, "isNav">) {
+  const wtp = useMemo(
+    () => data.socials.find((e) => e.icon === "whatsapp"),
+    [data.socials],
+  );
+
+  useEffect(() => {
+    // disable body scroll when dropdown is open
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
+  return (
+    <div
+      className={cx(
+        "fixed top-0 px-5 left-0 w-full h-full bg-white z-40 flex flex-col items-center justify-center transition-opacity duration-150 md:hidden",
+      )}
+    >
+      {[
+        { href: "/", label: "Home" },
+        { href: "/writings", label: t.writing },
+        ...data.socials.map((social) => ({
+          href: social.url,
+          label: socialIconNames[social.icon],
+        })),
+      ].map((link, index) => (
+        <a
+          key={index}
+          href={link.href}
+          className="text-secondary py-3 text-center font-medium w-full text-sm leading-4.5 px-1.5 rounded-md hover:bg-black/5 transition-colors duration-150"
+        >
+          {link.label}
+        </a>
+      ))}
+      <div className="flex flex-col  w-full gap-y-2.5 mt-6">
+        {wtp && (
+          <a href={wtp.url} className="w-max mx-auto">
+            <Button variant="text">
+              <WhatsappIcon className="fill-[#25D366]" />
+              <span className="font-semibold">{t.lets_chat_cta}</span>
+            </Button>
+          </a>
+        )}
+        <CalButton className="w-full text-center flex justify-center ">
+          {t.book_call_cta}
+        </CalButton>
+      </div>
+    </div>
+  );
+}
+
 export function AvatarDiv({
   data,
   t,
   isNav = false,
   showAvatar = true,
 }: HeroSectionProps) {
+  // TODO : this should be false
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const { deviceSize } = useDeviceSize();
+
+  useEffect(() => {
+    if (deviceSize !== "sm") {
+      setIsNavOpen(false);
+    }
+  }, [deviceSize]);
+
   return (
     <section
+      className={`flex w-full  md:w-auto justify-between md:justify-start gap-y-2.5 py-0.75 ${isNav ? "flex-row" : "flex-col mb-8"}`}
       id={isNav ? undefined : AVATAR_SECTION_ID}
-      className={`flex gap-y-2.5  ${isNav ? "flex-row" : "flex-col mb-8"}`}
     >
       <div className="flex gap-x-2.5 items-center">
         {data.avatar.url && (
@@ -93,6 +164,19 @@ export function AvatarDiv({
           );
         })}
       </div>
+      {isNav && (
+        <button onClick={() => setIsNavOpen((prev) => !prev)}>
+          {isNavOpen ? <CloseIcon /> : <HeaderDropIcon />}
+        </button>
+      )}
+
+      <NoSSR>
+        {isNavOpen &&
+          createPortal(
+            <HeaderDropdownExpanded data={data} t={t} />,
+            document.body,
+          )}
+      </NoSSR>
     </section>
   );
 }

@@ -34,7 +34,7 @@ export function BlogItem({
         props.className,
       )}
     >
-      <h4 className="text-gray-gray">{blog.title}</h4>
+      <h4 className="text-gray-gray line-clamp-1">{blog.title}</h4>
       {blog.category && (
         <span
           className={cx(

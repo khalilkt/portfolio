@@ -8,8 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload", 
-    "ci" : "payload migrate && pnpm build"
+    "payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload",
+    "ci": "payload migrate && pnpm build"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",
@@ -28,13 +28,14 @@
   "devDependencies": {
     "@payloadcms/graphql": "3.74.0",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^20.19.31",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   }
 }
